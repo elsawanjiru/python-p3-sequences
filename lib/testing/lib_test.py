@@ -1,29 +1,23 @@
 #!/usr/bin/env python3
 
-from sequences import print_fibonacci
-
 import io
 import sys
-
+import pytest
+from lib.sequences import print_fibonacci
 
 class TestPrintFibonacci:
-    '''function print_fibonacci()'''
-
-    def test_print_fibonacci_zero(self):
+    def test_print_fibonacci_zero(self, capsys):
         '''prints empty list when length = 0'''
-        captured_out = io.StringIO()
-        sys.stdout = captured_out
         print_fibonacci(0)
-        sys.stdout = sys.__stdout__
-        assert(captured_out.getvalue() == '[]\n')
+        captured_out, _ = capsys.readouterr()
+        assert captured_out == '[]\n'
 
-    def test_print_fibonacci_one(self):
+    def test_print_fibonacci_one(self, capsys):
         '''prints 0 when length = 1'''
-        captured_out = io.StringIO()
-        sys.stdout = captured_out
         print_fibonacci(1)
-        sys.stdout = sys.__stdout__
-        assert(captured_out.getvalue() == '[0]\n')
+        captured_out, _ = capsys.readouterr()
+        assert captured_out == '[0]\n'
+
 
     def test_print_fibonacci_two(self):
         '''prints 0\\n1 when length = 2'''
